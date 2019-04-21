@@ -15,7 +15,7 @@ OBJCOPY=$(COMPILER_PREFIX)-objcopy
 CFLAGS = -mcpu=cortex-a53  -mfpu=neon-fp-armv8 -Wall -O2\
          -ffreestanding -nostdinc -nostdlib -nostartfiles
 # RPi2
-CFLAGS = -O2 -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7
+CFLAGS = -O2 -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=cortex-a7 -g
 LDFLAGS = -nostdlib -nostartfiles
 
 all: $(ELF)
@@ -35,4 +35,4 @@ clean:
 rebuild: clean all
 
 rpi2_32:
-	qemu-system-arm -M raspi2 -kernel $(IMG) -d in_asm -nographic
+	qemu-system-arm -M raspi2 -m 128M -kernel $(IMG) -d in_asm -nographic -s
